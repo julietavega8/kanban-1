@@ -1,0 +1,36 @@
+{% extends 'kanboard/base.html' %}
+
+{% block body %}
+<div id="top">
+<h1>Kanboard Test</h1>
+
+<form id="add_card" method="post" action="">
+{{ form.as_p }}
+<div>
+<input type="submit" value="Add as Upcoming" name="upcoming" />
+<input type="submit" value="Pin to Board" name="pin" />
+</div>
+</form>
+</div>
+<div id="board">
+  {% for phase in board.phases.all %}
+  <div class="column">
+    <h2>{{ phase.title }}</h2>
+    <ul class="sortable phase" id='phase-{{ phase.id }}'>
+      {% for card in phase.cards.all %}
+       <li class="card" id='card-{{ card.id }}'>
+        <h3>{{ card.title }}</h3>
+        <p>{{ card.description }}</p>
+      </li>
+     {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</div>
+
+<div id="bottom">
+<ul id="messages" style="clear:left;">
+</ul>
+</div>
+
+{% endblock body %}
